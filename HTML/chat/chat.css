@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css?family=Lexend Deca');
+@import url('https://fonts.googleapis.com/css?family=Rubik Iso');
+@import url('https://fonts.googleapis.com/css?family=Sono');
+
+
+/* Contenedores de chat */
+.container {
+  border: 2px solid #d5f7ff;
+  background-color: #86cfff;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Contenedor de chat más oscuro */
+.darker {
+  border-color: #ffffff;
+  background-color: #ddd;
+}
+
+/* Limpiar flotantes */
+.container::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Estilo de las imágenes */
+.container img {
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Estilo de la imagen derecha */
+.container img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right: 0;
+}
+
+/* Estilo del texto del tiempo */
+.time-right {
+  float: right;
+  color: #000000;
+  font-family: 'Sono', sans-serif;
+
+}
+
+/* Estilo del texto del tiempo */
+.time-left {
+  float: left;
+  color: rgb(0, 0, 0);
+  font-family: 'Sono', sans-serif;
+
+}
+
+/* Estilo de los textos con la fuente Roboto */
+p {
+  font-family: 'Lexend Deca', sans-serif;
+}
+
+
+input[type=text] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+  box-sizing: border-box;
+  border: 3px solid #ccc;
+  -webkit-transition: 0.5s;
+  transition: 0.5s;
+  outline: none;
+  text-align:right;
+  float:left;
+  font-family: 'Sono', sans-serif;
+
+}
+
+
+input[type=text]:focus {
+  border: 3px solid #86cfff;
+}
+
+.button {
+  background-color: #86cfff; /* Green */
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  transition-duration: 0.4s;
+  cursor: pointer;
+  float:right;
+  font-family: 'Sono', sans-serif;
+
+}
+
+.button {
+  background-color: white; 
+  color: black; 
+  border: 2px solid #86cfff;
+}
+
+.button:hover {
+  background-color: #86cfff;
+  color: white;
+}
+
+header {
+  font-family: 'Rubik Iso', sans-serif;
+  text-align: center;
+  color: #ffffff;
+  font-size: 50px;
+}
+
+.you {
+  float: right;
+}
+
+
+
+html {
+  background-color: rgb(86, 95, 92);
+}
+

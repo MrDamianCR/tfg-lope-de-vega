@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Búsqueda de Servicios</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <img src="logo.png">
+        <form class="search-form">
+            <input type="text" name="search" placeholder="Buscar...">
+            <select name="service">
+                <option value="">Servicio</option>
+                <option value="servicio1">Peluqueria</option>
+                <option value="servicio2">Restaurante</option>
+                <option value="servicio3">Masaje</option>
+            </select>
+            <select name="city">
+                <option value="">Ciudad</option>
+                <option value="ciudad1">Cordoba</option>
+                <option value="ciudad2">Sevilla</option>
+                <option value="ciudad3">Jaen</option>
+            </select>
+            <button type="submit">Buscar</button>
+        </form>
+    </header>
+    <main>
+        <div class="services">
+            <h2>Resultados de búsqueda:</h2>
+            <div class="service">
+                <div class="service-body">
+
+                    <img src="https://titulae.es/wp-content/uploads/2021/11/grado-superior-peluqueria.jpg" alt="Imagen del servicio">
+                    <h3>Peluqueria Conchi</h3>
+                    <p>Cordoba</p>
+                    <p>15-30€</p>
+                </div>
+            </div>
+            <div class="service">
+                <div class="service-body">
+
+                    <img src="https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/villa-verbena-1-1618917719.jpeg?crop=1.00xw:0.600xh;0,0.326xh&resize=1200:*" alt="Imagen del servicio">
+                    <h3>Restaurante Mi Tio Paco</h3>
+                    <p>Jaen</p>
+                    <p>90-250€</p>
+                </div>
+            </div>
+            
+            <div class="service">
+                <div class="service-body">
+
+                    <img src="https://www.ceac.es/sites/default/files/2021/11/23063142621_bd7dcfe64e_o.jpg" alt="Imagen del servicio">
+                    <h3>Masajista Chin-Lu</h3>
+                    <p>Sevilla</p>
+                    <p>5-370€</p>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

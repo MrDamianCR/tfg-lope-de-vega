@@ -1,0 +1,627 @@
+.todo {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #1684ac;
+
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+header img{
+    max-width: 50%;
+    max-height: 80px;
+}
+
+header h1 {
+    font-size: 28px;
+}
+
+.service-image {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.service-image img {
+    max-width: 100%;
+    max-height: 500px;
+}
+
+.service-info {
+    margin: 20px;
+}
+
+.service-info h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.service-info p {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.service-info ul {
+    list-style: none;
+    margin-bottom: 20px;
+}
+
+.service-info ul li {
+    margin-bottom: 5px;
+}
+
+.service-info form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.service-info label {
+    margin-bottom: 10px;
+}
+
+.service-info input[type="datetime-local"] {
+    margin-bottom: 10px;
+}
+
+.service-info button[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+  .footer-about-us{
+    background-color: #000000;
+    color: #ffffff;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  body {
+    font-family: sans-serif;
+  }
+  
+  header {
+    background-color: #2d3436;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+  }
+  
+  header h1 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
+  .search-form {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .search-form input[type="text"],
+  .search-form select {
+    padding: 0.5rem;
+    border: none;
+    border-radius: 5px;
+    font-size: 1rem;
+  }
+  
+  .search-form button {
+    background-color: #fff;
+    color: #2d3436;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+  
+  .main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 2rem;
+  }
+  
+  .service {
+    width: calc((100% - 4rem) / 3);
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .service-body {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .service-body img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    margin-bottom: 1rem;
+  }
+  
+  .service-body h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-body p {
+    font-size: 1rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-body button {
+    background-color: #2d3436;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-top: auto;
+  }
+  
+  .service-info {
+    background-color: #fff;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+  }
+  
+  .service-info h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-info p {
+    font-size: 1.5rem;
+    text-align: center;
+    margin-bottom: 1.5rem;
+  }
+  
+  .service-info ul {
+    list-style: none;
+    text-align: center;
+  }
+  
+  .service-info li {
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .service-info form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .service-info label {
+
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* Header styles */
+
+header {
+    background-color: #333;
+    color: white;
+    padding: 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+h1{
+    margin: 0;
+
+}
+
+.service-image h1 {
+    color: white;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+}
+
+.search-form input[type="text"],
+.search-form select {
+    padding: 8px;
+    margin-right: 10px;
+    border-radius: 4px;
+    border: none;
+}
+
+.search-form button[type="submit"] {
+    background-color: #4CAF50;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+}
+
+/* Main styles */
+
+main {
+    padding: 20px;
+}
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.service {
+    background-color: #f2f2f2;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.service img {
+    display: block;
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.service-body {
+    padding: 20px;
+}
+
+.service h3 {
+    margin-top: 0;
+}
+
+.service p {
+    margin: 5px 0;
+}
+
+/* Service Info styles */
+
+.service-info {
+    background-color: #f2f2f2;
+    padding: 20px;
+    border-radius: 4px;
+}
+
+.service-info h2 {
+    margin-top: 0;
+}
+
+.service-info p {
+    margin-bottom: 10px;
+}
+
+.service-info li {
+    margin-bottom: 5px;
+}
+
+.service-info form {
+    display: flex;
+    align-items: center;
+}
+
+/* Estilos para la sección de servicios */
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin-top: 30px;
+}
+
+.service {
+  background-color: #fff;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  margin-bottom: 30px;
+  position: relative;
+  width: 350px;
+}
+
+.service:hover {
+  box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.4);
+}
+
+.service img {
+  display: block;
+  height: 250px;
+  width: 100%;
+  object-fit: cover;
+}
+
+.service .service-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.service h3 {
+  margin-top: 0;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.service p {
+  margin: 5px 0;
+  text-align: center;
+}
+
+.service-info {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto;
+  max-width: 500px;
+  padding: 20px;
+}
+
+.service-info h2 {
+  font-size: 2rem;
+  margin-top: 0;
+  text-align: center;
+}
+
+.service-info p {
+  margin: 10px 0;
+  text-align: center;
+}
+
+.service-info ul {
+  margin: 20px 0;
+  padding: 0;
+}
+
+.service-info li {
+  list-style-type: none;
+  margin-bottom: 10px;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+.service-info button {
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: auto;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.service-info button:hover {
+  background-color: #0b5ed7;
+}
+
+.service-info form label {
+  display: block;
+  margin-bottom: 10px;
+}
+
+.service-info form input[type="datetime-local"] {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 1.2rem;
+  padding: 10px;
+  width: 100%;
+}
+
+.service-info form button[type="submit"] {
+  background-color: #28a745;
+  border: none;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 1.2rem;
+  margin-top: 20px;
+  padding: 10px;
+  transition: all 0.2s ease-in-out;
+}
+
+.service-info form button[type="submit"]:hover {
+  background-color: #218838;
+}
+
+/* Estilos para la sección de servicios */
+.services {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 30px;
+  }
+  
+  .service {
+    background-color: #fff;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    margin-bottom: 30px;
+    position: relative;
+    width: 350px;
+  }
+  
+  .service:hover {
+    box-shadow: 0px 3px 20px rgba(0, 0, 0, 0.4);
+  }
+  
+  .service img {
+    display: block;
+    height: 250px;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .service .service-body {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+  }
+  
+  .service h3 {
+    margin-top: 0;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+  
+  .service p {
+    margin: 5px 0;
+    text-align: center;
+  }
+  
+  .service-info {
+    background-color: #fff;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    margin: 50px auto;
+    max-width: 500px;
+    padding: 20px;
+  }
+  
+  .service-info h2 {
+    font-size: 2rem;
+    margin-top: 0;
+    text-align: center;
+  }
+  
+  .service-info p {
+    margin: 10px 0;
+    text-align: center;
+  }
+  
+  .service-info ul {
+    margin: 20px 0;
+    padding: 0;
+  }
+  
+  .service-info li {
+    list-style-type: none;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+  }
+  
+  .service-info button {
+    background-color: #1684ac;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: auto;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .service-info button:hover {
+    background-color: #035674;
+  }
+  
+  .service-info form label {
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .service-info form input[type="datetime-local"] {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    padding: 10px;
+    width: 100%;
+  }
+  
+  .service-info form button[type="submit"] {
+    background-color: #1684ac;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin-top: 20px;
+    padding: 10px;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .service-info form button[type="submit"]:hover {
+    background-color: #035674;
+  }
+  
+
+  .servicios{
+    display: flex;
+}
