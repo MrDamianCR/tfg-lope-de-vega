@@ -1,0 +1,134 @@
+body {
+    font-family: 'Dosis', sans-serif;
+  }
+  
+  h2, h3, p {
+    font-family: 'Dosis', sans-serif;
+  }
+
+  h2{
+    font-weight: bold;
+  }
+
+  .precio {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #000000;
+    margin-bottom: 0.5em;
+  }
+  
+  .horario {
+    font-style: italic;
+    font-size: 0.9em;
+    color: #666;
+  }
+  
+  
+
+.empresas {
+    padding: 50px 0;
+    text-align: center;
+  }
+
+  .empresa {
+    background-color: #46b6f7; /* color de fondo */
+    border-radius: 10px; /* borde redondeado */
+    padding: 20px; /* espacio interno */
+    margin: 20px; /* margen externo */
+    box-sizing: border-box; /* incluir bordes y padding en el ancho */
+  }
+  
+  
+  .empresa:nth-child(even) {
+    float: right; /* alinear a la derecha */
+  }
+  
+  .empresa:nth-child(odd) {
+    float: left; /* alinear a la izquierda */
+  }
+  
+  
+  
+  .empresa {
+    display: inline-block;
+    margin: 0 20px 50px;
+    text-align: left;
+    max-width: 400px;
+  }
+  
+  .empresa img {
+    width: 100%;
+    height: auto;
+  }
+  
+  .empresa h3 {
+    margin-top: 20px;
+  }
+  
+  .empresa p {
+    font-size: 16px;
+    line-height: 1.5;
+    margin: 10px 0 20px;
+  }
+  
+  .btn {
+    display: inline-block;
+    background-color: #4c6baf;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .btn:hover {
+    background-color: #5e89e7;
+  }
+
+  .search-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 20px;
+    position: relative;
+  }
+  
+  .search-container input[type="text"] {
+    width: 300px;
+    padding: 12px 20px;
+    margin-right: 10px;
+    border-radius: 30px;
+    border: none;
+    font-size: 16px;
+    outline: none;
+  }
+  
+  .search-container button[type="submit"] {
+    border: none;
+    outline: none;
+    color: #fff;
+    background-color: #4c6baf;
+    font-size: 16px;
+    padding: 12px 20px;
+    border-radius: 50%;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+  }
+  
+  .search-container button[type="submit"]:hover {
+    background-color: #4c6baf;
+  }
+  
+  .search-container input[type="text"]:focus {
+    box-shadow: 0 0 10px #4c6baf;
+  }
+  
+  .search-container button[type="submit"]:focus {
+    box-shadow: 0 0 10px #4c6baf;
+  }
+  
+
+  
+  
+  

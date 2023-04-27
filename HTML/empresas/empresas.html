@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dosis">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="empresassryle.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap" rel="stylesheet">
+
+    <title>Empresas para Reservar</title>
+</head>
+<body>
+    <header>
+        <div class="search-bar">
+            <div class="search-container">
+                <input type="text" placeholder="Buscar...">
+                <button type="submit"><i class="fa fa-search"></i>ir</button>
+              </div>
+              
+          </div>
+    </header>
+    <section class="empresas">
+        <div class="container">
+            <div class="empresa">
+                <img src="emp1.jpg" alt="Empresa 1" onclick="mostrarInfo('Empresa 1', 'Esta es la información de la Empresa 1.', '$50', 'Lunes a Viernes')">
+                <h3>Empresa 1</h3>
+                <p class="precio">$50</p>
+                <p class="horario">Lunes a Viernes</p>
+                <a href="#" class="btn">Reservar</a>
+            </div>
+            <div class="empresa">
+                <img src="emp2.png" alt="Empresa 2" onclick="mostrarInfo('Empresa 2', 'Esta es la información de la Empresa 2.', '$75', 'Martes a Sábado')">
+                <h3>Empresa 2</h3>
+                <p class="precio">$75</p>
+                <p class="horario">Martes a Sábado</p>
+                <a href="#" class="btn">Reservar</a>
+            </div>
+            <div class="empresa">
+                <img src="emp3.jpg" alt="Empresa 3" onclick="mostrarInfo('Empresa 3', 'Esta es la información de la Empresa 3.', '$100', 'Lunes a Domingo')">
+                <h3>Empresa 3</h3>
+                <p class="precio">$100</p>
+                <p class="horario">Lunes a Domingo</p>
+                <a href="#" class="btn">Reservar</a>
+            </div>
+        </div>
+    </section>
+    <script src="empresas.js"></script>
+</body>
+</html>
+  
