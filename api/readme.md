@@ -1,1 +1,1 @@
-Aqui habria algo si ha alvaro le diera por trabajar.
+Aqui habria algo si a alvaro le diera por trabajar.
