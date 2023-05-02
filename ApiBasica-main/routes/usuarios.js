@@ -75,7 +75,7 @@ router.post("/usuarios", (req, res) => {
     );
 });
 
-// Actualizar usuario aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
+// Actualizar usuario 
 router.put("/usuarios/:id_usuario", (req, res) => {
     const userId = req.params.id_usuario;
     const {
