@@ -84,20 +84,29 @@ router.get("/chat/empresa/:id_empresa_chat", (req, res) => {
         res.json(results);
     });
 });
-// enviar un mensaje de chat 
 
+// Enviar un mensaje de chat 
+// Definimos una ruta POST para enviar un mensaje de chat 
 router.post("/chat", (req, res) => {
+    // Extraemos los datos del cuerpo de la solicitud
     const { mensaje_chat, id_usuario_chat, id_empresa_chat } = req.body;
-    const sql = "INSERT INTO chat (mensaje_chat, id_usuario_chat, id_empresa_chat) VALUES (?, ?, ?)";
+    
+    // Creamos una consulta SQL para insertar un nuevo mensaje de chat en la tabla 'chat'
+    const sql = "INSERT INTO chat (mensaje_chat, id_usuario_chat, id_empresa_chat, fecha_hora_envio_chat) VALUES (?, ?, ?, NOW())";
+
+    // Creamos una matriz con los valores a insertar en la consulta SQL
     const values = [mensaje_chat, id_usuario_chat, id_empresa_chat];
 
+    // Ejecutamos la consulta SQL usando la conexión a la base de datos
     connection.query(sql, values, (error, results) => {
+        // Si hay un error, enviamos una respuesta con el código de estado 500 y un mensaje de error
         if (error) {
             console.error("Error al agregar mensaje: ", error);
             res.status(500).send("Error al agregar mensaje");
             return;
         }
 
+        // Si la consulta se ejecutó correctamente, enviamos una respuesta con el código de estado 201 y un mensaje de éxito
         res.status(201).json({ message: "Mensaje agregado exitosamente", messageId: results.insertId });
     });
 });

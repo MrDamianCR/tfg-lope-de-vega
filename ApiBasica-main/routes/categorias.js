@@ -2,7 +2,7 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../db");
 
-// Mostrar todas las categorias
+//  Mostrar todas las categorias
 router.get("/categorias", (req, res) => {
     const sql = "SELECT * FROM categorias";
 
@@ -18,6 +18,7 @@ router.get("/categorias", (req, res) => {
 });
 
 //  Información de la categoria con ID: **** ?
+
 router.get("/categorias/:id_categoria", (req, res) => {
     const categoriaId = req.params.id_categoria;
     const sql =

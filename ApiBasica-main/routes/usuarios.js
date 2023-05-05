@@ -18,6 +18,7 @@ router.get("/usuarios", (req, res) => {
 });
 
 //  Información del usuario con ID: **** ?
+// ENCRIPTARLO
 router.get("/usuarios/:id_usuario", (req, res) => {
     const userId = req.params.id_usuario;
     const sql =
@@ -70,7 +71,7 @@ router.post("/usuarios", (req, res) => {
                 return;
             }
 
-            res.json(result);
+            res.status(202).json(result);
         }
     );
 });
