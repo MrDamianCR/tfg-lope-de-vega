@@ -1,0 +1,23 @@
+    <nav id="sidebar" #sidebar [ngStyle]="{ 'height': sidebarHeight+'px' }">
+        <div class="sidebar-header">
+        <h3><img src="assets/img/logo.png" alt=""></h3>
+
+        </div>
+            <hr>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+              
+                    <li>
+                        <a routerLink="/perfil">Perfil</a>
+                    </li>
+                <li>
+                    <a routerLink="/estadisticas">Estadísticas</a>
+                </li>
+                <li>
+                    <a routerLink="/servicios">Gestionar Servicios</a>
+                </li>
+                <li>
+                    <a href="#Servicios">Preferencias</a>
+                </li>
+
+            </ul>
+    </nav>

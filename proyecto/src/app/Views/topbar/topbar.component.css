@@ -1,0 +1,45 @@
+nav{
+    width: 100%;
+    display: flex;
+    position: relative;
+    background-color: #13266C;
+    height: 100px;
+    top: 0;
+    align-items: center;
+}
+
+div#search{
+    position: relative;
+    height: 46px;
+    left: 50%;
+    width: 230px;
+}
+
+input{
+    height: inherit;
+    border: 1px solid #fff;
+    border-radius: 28px;
+    padding: 0 15px;
+    width: 100%;
+}
+
+input:focus-visible{
+    border: 0;
+}
+
+button{
+    position: relative;
+    left: 94%;
+    bottom: 102%;
+    width: 46px;
+    border-radius: 29px;
+    height: 46px;
+    border: 1px solid #fff;
+    background: #13266C;
+}
+
+button:hover{
+    width: 60px;
+    height: 60px;
+    transition: all .5s;
+}

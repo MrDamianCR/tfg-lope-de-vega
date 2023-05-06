@@ -1,0 +1,43 @@
+nav {
+    min-width: 250px;
+    max-width: 250px;
+    background: #13266C;
+    transition: all 0.3s;
+    display: inline-block;
+    position: relative;
+    left: 0;
+    top: 0;
+
+}
+
+img{
+    height: 90%;
+    width: 90%;
+}
+
+/*-------*/
+
+hr{
+    width: 85%;
+}
+
+ul{
+    padding: 0;
+}
+
+nav, nav *{
+    color: #fff;
+    font-family: Poppins;
+}
+
+#sidebar ul li a:hover {
+    color: #7386D5;
+    background: #fff;
+}
+
+nav ul li a {
+    padding: 10px;
+    font-size: 1.1em;
+    display: block;
+    text-decoration: none;
+}
