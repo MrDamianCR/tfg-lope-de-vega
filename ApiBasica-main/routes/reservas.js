@@ -27,7 +27,8 @@ router.get("/reservas", (req, res) => {
     // Insertar la nueva reserva en la tabla de reservas
     const sql = "INSERT INTO reservas (fecha_hora_reserva, comentario_reserva, id_usuario_reserva, id_empresa_reserva, id_servicio_reserva) VALUES (?, ?, ?, ?, ?)";
   
-    connection.query(sql, [nuevaReserva.fecha_hora_reserva, nuevaReserva.comentario_reserva, idUsuarioReserva, nuevaReserva.id_empresa_reserva, nuevaReserva.id_servicio_reserva], (error, result) => {
+    connection.query(sql, [nuevaReserva.fecha_hora_reserva, nuevaReserva.comentario_reserva, idUsuarioReserva, nuevaReserva.id_empresa_reserva, 
+        nuevaReserva.id_servicio_reserva], (error, result) => {
       if (error) {
         console.error("Error al agregar reserva: ", error);
         res.status(500).send("Error al agregar reserva");
