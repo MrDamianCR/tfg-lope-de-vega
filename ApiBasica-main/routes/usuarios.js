@@ -229,29 +229,57 @@ router.post("/iniciar_sesion", async (req, res) => {
 
 //cambiar contraseña
 
-router.put("/usuarios/cambiarcontrasena/:nombre_usuario", (req, res) => {
+router.put("/usuarios/cambiarcontrasena/:nombre_usuario", async (req, res) => {
     const username = req.params.nombre_usuario;
-    const { pass_usuario } = req.body;
-    const sql =
-        "UPDATE usuarios SET pass_usuario=? WHERE nombre_usuario=?";
+    const { oldPassword, newPassword } = req.body;
 
-    connection.query(
-        sql,
-        [
-            pass_usuario,
-            username,
-        ],
-        (error, result) => {
+    try {
+        // Verificar la contraseña antigua
+        const isOldPasswordCorrect = await verificarContrasenaAntigua(username, oldPassword);
+
+        if (isOldPasswordCorrect) {
+            // Actualizar la contraseña en la base de datos
+            const sql = "UPDATE usuarios SET pass_usuario = ? WHERE nombre_usuario = ?";
+            connection.query(sql, [newPassword, username], (error, result) => {
+                if (error) {
+                    console.error("Error al actualizar contraseña: ", error);
+                    res.status(500).send("Error al actualizar contraseña");
+                    return;
+                }
+
+                res.json(result);
+            });
+        } else {
+            // La contraseña antigua es incorrecta
+            res.status(401).send("Contraseña antigua incorrecta");
+        }
+    } catch (error) {
+        console.error("Error al verificar la contraseña antigua: ", error);
+        res.status(500).send("Error al verificar la contraseña antigua");
+    }
+});
+
+function verificarContrasenaAntigua(username, oldPassword) {
+    return new Promise((resolve, reject) => {
+        const sql = "SELECT pass_usuario FROM usuarios WHERE nombre_usuario = ?";
+        connection.query(sql, [username], (error, result) => {
             if (error) {
-                console.error("Error al actualizar contraseña: ", error);
-                res.status(500).send("Error al actualizar contraseña");
+                reject(error);
                 return;
             }
 
-            res.json(result);
-        }
-    );
-});
+            if (result.length === 0) {
+                resolve(false);
+                return;
+            }
+
+            const actualPassword = result[0].pass_usuario;
+            resolve(actualPassword === oldPassword);
+        });
+    });
+}
+
+
 
 
 
