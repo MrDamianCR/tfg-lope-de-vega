@@ -226,4 +226,33 @@ router.post("/iniciar_sesion", async (req, res) => {
     }
 });
 
+
+//cambiar contraseña
+
+router.put("/usuarios/cambiarcontrasena/:nombre_usuario", (req, res) => {
+    const username = req.params.nombre_usuario;
+    const { pass_usuario } = req.body;
+    const sql =
+        "UPDATE usuarios SET pass_usuario=? WHERE nombre_usuario=?";
+
+    connection.query(
+        sql,
+        [
+            pass_usuario,
+            username,
+        ],
+        (error, result) => {
+            if (error) {
+                console.error("Error al actualizar contraseña: ", error);
+                res.status(500).send("Error al actualizar contraseña");
+                return;
+            }
+
+            res.json(result);
+        }
+    );
+});
+
+
+
 module.exports = router;
