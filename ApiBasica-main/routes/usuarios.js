@@ -40,7 +40,6 @@ router.get("/usuarios/:id_usuario", (req, res) => {
     });
 });
 
-
 /*const crypto = require('crypto');
 const algorithm = 'aes-256-ctr';
 const key = 'clave-secreta';
@@ -82,7 +81,6 @@ router.get("/usuarios/:id_usuario", (req, res) => {
     });
 });*/
 
-
 // Añadir usuario
 router.post("/usuarios", (req, res) => {
     const {
@@ -119,7 +117,7 @@ router.post("/usuarios", (req, res) => {
     );
 });
 
-// Actualizar usuario 
+// Actualizar usuario
 router.put("/usuarios/:id_usuario", (req, res) => {
     const userId = req.params.id_usuario;
     const {
@@ -156,6 +154,76 @@ router.put("/usuarios/:id_usuario", (req, res) => {
             res.json(result);
         }
     );
+});
+
+//INICIAR SEION
+function verificarCredenciales(id, contrasena) {
+    const sql =
+        "SELECT * FROM usuarios WHERE id_usuario = ? AND pass_usuario = ?";
+    const values = [id, contrasena];
+
+    return new Promise((resolve, reject) => {
+        connection.query(sql, values, (error, result) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+
+            // Verificar si se encontró un usuario con las credenciales proporcionadas
+            resolve(result.length > 0);
+        });
+    });
+}
+
+function obtenerInformacionUsuario(id) {
+    const sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
+    const values = [id];
+
+    return new Promise((resolve, reject) => {
+        connection.query(sql, values, (error, result) => {
+            if (error) {
+                reject(error);
+                return;
+            }
+
+            if (result.length === 0) {
+                reject("Usuario no encontrado");
+                return;
+            }
+
+            const usuarioEncontrado = result[0];
+
+            const informacionUsuario = {
+                id: usuarioEncontrado.id_usuario,
+                nombre: usuarioEncontrado.nombre_usuario,
+                apellidos: usuarioEncontrado.apellidos_usuario,
+                email: usuarioEncontrado.email_usuario,
+                fechaNacimiento: usuarioEncontrado.fecha_nacimiento_usuario,
+                telefono: usuarioEncontrado.telefono_usuario,
+                emailRecuperacion: usuarioEncontrado.email_recuperacion_usuario,
+            };
+
+            resolve(informacionUsuario);
+        });
+    });
+}
+
+router.post("/iniciar_sesion", async (req, res) => {
+    const { id, contrasena } = req.body;
+
+    try {
+        const credencialesValidas = await verificarCredenciales(id, contrasena);
+
+        if (credencialesValidas) {
+            const informacionUsuario = await obtenerInformacionUsuario(id);
+            res.json(informacionUsuario);
+        } else {
+            res.status(401).send("Credenciales inválidas");
+        }
+    } catch (error) {
+        console.error("Error al verificar las credenciales: ", error);
+        res.status(500).send("Error al verificar las credenciales");
+    }
 });
 
 module.exports = router;
