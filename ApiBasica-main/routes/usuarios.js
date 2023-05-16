@@ -156,11 +156,11 @@ router.put("/usuarios/:id_usuario", (req, res) => {
     );
 });
 
-//INICIAR SEION
-function verificarCredenciales(id, contrasena) {
+// INICIAR SEION
+function verificarCredenciales(nombre, contrasena) {
     const sql =
-        "SELECT * FROM usuarios WHERE id_usuario = ? AND pass_usuario = ?";
-    const values = [id, contrasena];
+        "SELECT * FROM usuarios WHERE nombre_usuario = ? AND pass_usuario = ?";
+    const values = [nombre, contrasena];
 
     return new Promise((resolve, reject) => {
         connection.query(sql, values, (error, result) => {
@@ -175,9 +175,9 @@ function verificarCredenciales(id, contrasena) {
     });
 }
 
-function obtenerInformacionUsuario(id) {
-    const sql = "SELECT * FROM usuarios WHERE id_usuario = ?";
-    const values = [id];
+function obtenerInformacionUsuario(nombre) {
+    const sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
+    const values = [nombre];
 
     return new Promise((resolve, reject) => {
         connection.query(sql, values, (error, result) => {
@@ -209,13 +209,13 @@ function obtenerInformacionUsuario(id) {
 }
 
 router.post("/iniciar_sesion", async (req, res) => {
-    const { id, contrasena } = req.body;
+    const { nombre, contrasena } = req.body;
 
     try {
-        const credencialesValidas = await verificarCredenciales(id, contrasena);
+        const credencialesValidas = await verificarCredenciales(nombre, contrasena);
 
         if (credencialesValidas) {
-            const informacionUsuario = await obtenerInformacionUsuario(id);
+            const informacionUsuario = await obtenerInformacionUsuario(nombre);
             res.json(informacionUsuario);
         } else {
             res.status(401).send("Credenciales inválidas");
