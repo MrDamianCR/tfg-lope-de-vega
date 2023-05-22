@@ -39,5 +39,27 @@ router.get("/empresas/:id_empresa", (req, res) => {
     });
 });
 
+//  Buscar nombre empresa: **** ?
+router.get("/empresas/nombre/:nombre_empresa", (req, res) => {
+    const nombreEmpresa = req.params.nombre_empresa;
+    const sql =
+        "SELECT nombre_empresa FROM empresas WHERE nombre_empresa LIKE ?";
+
+    connection.query(sql, [`%${nombreEmpresa}%`], (error, results) => {
+        if (error) {
+            console.error("Error al obtener empresas por nombre: ", error);
+            res.status(500).send("Error al obtener empresas por nombre");
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send("Empresas no encontradas");
+            return;
+        }
+
+        res.json(results);
+    });
+});
+
 
 module.exports = router;

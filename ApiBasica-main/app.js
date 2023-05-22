@@ -9,6 +9,7 @@ const chatRouter = require("./routes/chat");
 const serviciosRouter = require("./routes/servicios");
 const facturasRouter = require("./routes/facturas");
 const reservasRouter = require("./routes/reservas");
+const empresaservicioRouter = require("./routes/empresa_servicio");
 
 
 const connection = require("./db");
@@ -28,6 +29,7 @@ app.use("/api", chatRouter);
 app.use("/api", serviciosRouter);
 app.use("/api", facturasRouter);
 app.use("/api", reservasRouter);
+app.use("/api", empresaservicioRouter);
 
 
 // Iniciar el servidor
