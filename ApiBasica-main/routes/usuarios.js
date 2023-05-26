@@ -117,7 +117,7 @@ router.post("/usuarios", (req, res) => {
     );
 });
 
-// Actualizar usuario
+// Actualizar usuario tienes que rellenar TODOS los campos
 router.put("/usuarios/:id_usuario", (req, res) => {
     const userId = req.params.id_usuario;
     const {
@@ -154,6 +154,85 @@ router.put("/usuarios/:id_usuario", (req, res) => {
             res.json(result);
         }
     );
+});
+
+//CAMBIAR DATOS DE USUARIOS SIN rellenar TODOS los datos, solo los que digites
+router.put("/usuarios/cambiardatos/:id_usuario", (req, res) => {
+    const userId = req.params.id_usuario;
+    const {
+        nombre_usuario,
+        apellidos_usuario,
+        email_usuario,
+        pass_usuario,
+        fecha_nacimiento_usuario,
+        telefono_usuario,
+        email_recuperacion_usuario
+    } = req.body;
+
+    let sql = "UPDATE usuarios SET ";
+    const values = [];
+
+    if (nombre_usuario !== undefined) {
+        sql += "nombre_usuario = ?, ";
+        values.push(nombre_usuario);
+    }
+
+    if (apellidos_usuario !== undefined) {
+        sql += "apellidos_usuario = ?, ";
+        values.push(apellidos_usuario);
+    }
+
+    if (email_usuario !== undefined) {
+        sql += "email_usuario = ?, ";
+        values.push(email_usuario);
+    }
+
+    if (pass_usuario !== undefined) {
+        sql += "pass_usuario = ?, ";
+        values.push(pass_usuario);
+    }
+
+    if (fecha_nacimiento_usuario !== undefined) {
+        sql += "fecha_nacimiento_usuario = ?, ";
+        values.push(fecha_nacimiento_usuario);
+    }
+
+    if (telefono_usuario !== undefined) {
+        sql += "telefono_usuario = ?, ";
+        values.push(telefono_usuario);
+    }
+
+    if (email_recuperacion_usuario !== undefined) {
+        sql += "email_recuperacion_usuario = ?, ";
+        values.push(email_recuperacion_usuario);
+    }
+
+    // Eliminar la coma final si hay campos a actualizar
+    if (values.length > 0) {
+        sql = sql.slice(0, -2);
+        sql += " ";
+    } else {
+        res.status(400).send("No se proporcionaron datos para actualizar");
+        return;
+    }
+
+    sql += "WHERE id_usuario = ?";
+    values.push(userId);
+
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error("Error al actualizar usuario: ", error);
+            res.status(500).send("Error al actualizar usuario");
+            return;
+        }
+
+        if (results.affectedRows === 0) {
+            res.status(404).send("Usuario no encontrado");
+            return;
+        }
+
+        res.status(200).send("Usuario actualizado correctamente");
+    });
 });
 
 // INICIAR SEION
@@ -278,6 +357,86 @@ function verificarContrasenaAntigua(username, oldPassword) {
         });
     });
 }
+
+//CAMBIAR DATOS DE USUARIOS
+router.put("/usuarios/cambiardatos/:id_usuario", (req, res) => {
+    const userId = req.params.id_usuario;
+    const {
+        nombre_usuario,
+        apellidos_usuario,
+        email_usuario,
+        pass_usuario,
+        fecha_nacimiento_usuario,
+        telefono_usuario,
+        email_recuperacion_usuario
+    } = req.body;
+
+    let sql = "UPDATE usuarios SET ";
+    const values = [];
+
+    if (nombre_usuario !== undefined) {
+        sql += "nombre_usuario = ?, ";
+        values.push(nombre_usuario);
+    }
+
+    if (apellidos_usuario !== undefined) {
+        sql += "apellidos_usuario = ?, ";
+        values.push(apellidos_usuario);
+    }
+
+    if (email_usuario !== undefined) {
+        sql += "email_usuario = ?, ";
+        values.push(email_usuario);
+    }
+
+    if (pass_usuario !== undefined) {
+        sql += "pass_usuario = ?, ";
+        values.push(pass_usuario);
+    }
+
+    if (fecha_nacimiento_usuario !== undefined) {
+        sql += "fecha_nacimiento_usuario = ?, ";
+        values.push(fecha_nacimiento_usuario);
+    }
+
+    if (telefono_usuario !== undefined) {
+        sql += "telefono_usuario = ?, ";
+        values.push(telefono_usuario);
+    }
+
+    if (email_recuperacion_usuario !== undefined) {
+        sql += "email_recuperacion_usuario = ?, ";
+        values.push(email_recuperacion_usuario);
+    }
+
+    // Eliminar la coma final si hay campos a actualizar
+    if (values.length > 0) {
+        sql = sql.slice(0, -2);
+        sql += " ";
+    } else {
+        res.status(400).send("No se proporcionaron datos para actualizar");
+        return;
+    }
+
+    sql += "WHERE id_usuario = ?";
+    values.push(userId);
+
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error("Error al actualizar usuario: ", error);
+            res.status(500).send("Error al actualizar usuario");
+            return;
+        }
+
+        if (results.affectedRows === 0) {
+            res.status(404).send("Usuario no encontrado");
+            return;
+        }
+
+        res.status(200).send("Usuario actualizado correctamente");
+    });
+});
+
 
 
 

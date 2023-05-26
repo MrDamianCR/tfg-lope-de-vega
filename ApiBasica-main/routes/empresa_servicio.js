@@ -25,11 +25,11 @@ const connection = require("../db");
 });*/
 
 
-//  Información de la empresa-servicio con ID: **** ?
-router.get("/empresa-servicio/:id", (req, res) => {
-    const empresaservicioId = req.params.id;
+//  Información de la empresa-servicio con Id_servicio: **** ?
+router.get("/empresa-servicio/:id_servicio", (req, res) => {
+    const empresaservicioId = req.params.id_servicio;
     const sql =
-        "SELECT es.precio, e.nombre_empresa FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa WHERE es.id = ?";
+        "SELECT es.precio, e.nombre_empresa FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa WHERE es.id_servicio = ?";
 
     connection.query(sql, [empresaservicioId], (error, results) => {
         if (error) {

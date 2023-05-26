@@ -144,4 +144,98 @@ router.post("/iniciar_sesion_empresa", async (req, res) => {
 });
 
 
+
+//  Información de la empresa con ID: **** ?
+router.get("/empresas/:id_empresa", (req, res) => {
+    const empresaId = req.params.id_empresa;
+    const sql =
+        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa, horario_empresa, id_categoria_empresa FROM empresas WHERE id_empresa = ?";
+
+    connection.query(sql, [empresaId], (error, results) => {
+        if (error) {
+            console.error("Error al obtener empresa: ", error);
+            res.status(500).send("Error al obtener empresa");
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send("empresa no encontrada");
+            return;
+        }
+
+        res.json(results[0]);
+    });
+});
+
+
+//MODIFICA LOS DATOS DIGITADOS, SI LOS DEJAS SIN RELLENAR SE MANTIENEN LOS DATOS ANTIGUOS
+router.put("/empresas/:id_empresa", (req, res) => {
+    const empresaId = req.params.id_empresa;
+    const {
+        nombre_empresa,
+        cif_empresa,
+        email_empresa,
+        email_recuperacion_empresa,
+        ciudad_empresa,
+        direccion_empresa,
+        telefono1_empresa,
+        telefono2_empresa,
+        telefono3_empresa,
+        web_empresa,
+        descripcion_empresa,
+        fecha_creacion_empresa,
+        horario_empresa,
+    } = req.body;
+
+    const sql = `UPDATE empresas SET 
+        nombre_empresa = IFNULL(?, nombre_empresa),
+        cif_empresa = IFNULL(?, cif_empresa),
+        email_empresa = IFNULL(?, email_empresa),
+        email_recuperacion_empresa = IFNULL(?, email_recuperacion_empresa),
+        ciudad_empresa = IFNULL(?, ciudad_empresa),
+        direccion_empresa = IFNULL(?, direccion_empresa),
+        telefono1_empresa = IFNULL(?, telefono1_empresa),
+        telefono2_empresa = IFNULL(?, telefono2_empresa),
+        telefono3_empresa = IFNULL(?, telefono3_empresa),
+        web_empresa = IFNULL(?, web_empresa),
+        descripcion_empresa = IFNULL(?, descripcion_empresa),
+        fecha_creacion_empresa = IFNULL(?, fecha_creacion_empresa),
+        horario_empresa = IFNULL(?, horario_empresa)
+        WHERE id_empresa = ?`;
+
+    const values = [
+        nombre_empresa,
+        cif_empresa,
+        email_empresa,
+        email_recuperacion_empresa,
+        ciudad_empresa,
+        direccion_empresa,
+        telefono1_empresa,
+        telefono2_empresa,
+        telefono3_empresa,
+        web_empresa,
+        descripcion_empresa,
+        fecha_creacion_empresa,
+        horario_empresa,
+        empresaId
+    ];
+
+    connection.query(sql, values, (error, results) => {
+        if (error) {
+            console.error("Error al actualizar empresa: ", error);
+            res.status(500).send("Error al actualizar empresa");
+            return;
+        }
+
+        if (results.affectedRows === 0) {
+            res.status(404).send("Empresa no encontrada");
+            return;
+        }
+
+        res.status(200).send("Empresa actualizada correctamente");
+    });
+});
+
+
+
 module.exports = router;
