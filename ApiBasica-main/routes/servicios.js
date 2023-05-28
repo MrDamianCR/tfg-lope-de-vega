@@ -17,13 +17,12 @@ router.get("/servicios", (req, res) => {
     });
 });
 
-
 //  Información del servicio con ID: **** ?
 
-router.get("/servicios/:id_servicio", (req, res)=>{
+router.get("/servicios/:id_servicio", (req, res) => {
     const servicioId = req.params.id_servicio;
     const sql = "SELECT nombre_servicio FROM servicios WHERE id_servicio = ?";
-    
+
     connection.query(sql, [servicioId], (error, results) => {
         if (error) {
             console.error("Error al obtener servicio: ", error);
@@ -38,11 +37,5 @@ router.get("/servicios/:id_servicio", (req, res)=>{
 
         res.json(results[0]);
     });
-
 });
 module.exports = router;
-
-
-
-
-

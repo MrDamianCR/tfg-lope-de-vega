@@ -24,7 +24,6 @@ const connection = require("../db");
     });
 });*/
 
-
 //  Información de la empresa-servicio con Id_servicio: **** ?
 router.get("/empresa-servicio/:id_servicio", (req, res) => {
     const empresaservicioId = req.params.id_servicio;
@@ -33,8 +32,13 @@ router.get("/empresa-servicio/:id_servicio", (req, res) => {
 
     connection.query(sql, [empresaservicioId], (error, results) => {
         if (error) {
-            console.error("Error al obtener información de la empresa, el servicio y el precio: ", error);
-            res.status(500).send("Error al obtener información de la empresa, el servicio y el precio");
+            console.error(
+                "Error al obtener información de la empresa, el servicio y el precio: ",
+                error
+            );
+            res.status(500).send(
+                "Error al obtener información de la empresa, el servicio y el precio"
+            );
             return;
         }
 
@@ -46,8 +50,6 @@ router.get("/empresa-servicio/:id_servicio", (req, res) => {
         res.json(results[0]);
     });
 });
-
-
 
 //  Información de la empresa-servicio con id_empresa **** ?
 router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
@@ -57,8 +59,13 @@ router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
 
     connection.query(sql, [empresaservicioId], (error, results) => {
         if (error) {
-            console.error("Error al obtener información de la empresa, el servicio y el precio: ", error);
-            res.status(500).send("Error al obtener información de la empresa, el servicio y el precio");
+            console.error(
+                "Error al obtener información de la empresa, el servicio y el precio: ",
+                error
+            );
+            res.status(500).send(
+                "Error al obtener información de la empresa, el servicio y el precio"
+            );
             return;
         }
 
@@ -70,11 +77,5 @@ router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
         res.json(results[0]);
     });
 });
-
-
-
-
-
-
 
 module.exports = router;

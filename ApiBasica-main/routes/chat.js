@@ -40,12 +40,10 @@ router.get("/chat/:id_chat", (req, res) => {
     });
 });
 
-
 // informacion del chat de id de usuario
 router.get("/chat/usuario/:id_usuario_chat", (req, res) => {
     const usuarioId = req.params.id_usuario_chat;
-    const sql =
-        "SELECT * FROM chat WHERE id_usuario_chat = ?";
+    const sql = "SELECT * FROM chat WHERE id_usuario_chat = ?";
 
     connection.query(sql, [usuarioId], (error, results) => {
         if (error) {
@@ -66,8 +64,7 @@ router.get("/chat/usuario/:id_usuario_chat", (req, res) => {
 // informacion del chat de id de empresa
 router.get("/chat/empresa/:id_empresa_chat", (req, res) => {
     const empresaId = req.params.id_empresa_chat;
-    const sql =
-        "SELECT * FROM chat WHERE id_empresa_chat = ?";
+    const sql = "SELECT * FROM chat WHERE id_empresa_chat = ?";
 
     connection.query(sql, [empresaId], (error, results) => {
         if (error) {
@@ -85,14 +82,15 @@ router.get("/chat/empresa/:id_empresa_chat", (req, res) => {
     });
 });
 
-// Enviar un mensaje de chat 
-// Definimos una ruta POST para enviar un mensaje de chat 
+// Enviar un mensaje de chat
+// Definimos una ruta POST para enviar un mensaje de chat
 router.post("/chat", (req, res) => {
     // Extraemos los datos del cuerpo de la solicitud
     const { mensaje_chat, id_usuario_chat, id_empresa_chat } = req.body;
-    
+
     // Creamos una consulta SQL para insertar un nuevo mensaje de chat en la tabla 'chat'
-    const sql = "INSERT INTO chat (mensaje_chat, id_usuario_chat, id_empresa_chat, fecha_hora_envio_chat) VALUES (?, ?, ?, NOW())";
+    const sql =
+        "INSERT INTO chat (mensaje_chat, id_usuario_chat, id_empresa_chat, fecha_hora_envio_chat) VALUES (?, ?, ?, NOW())";
 
     // Creamos una matriz con los valores a insertar en la consulta SQL
     const values = [mensaje_chat, id_usuario_chat, id_empresa_chat];
@@ -107,7 +105,10 @@ router.post("/chat", (req, res) => {
         }
 
         // Si la consulta se ejecutó correctamente, enviamos una respuesta con el código de estado 201 y un mensaje de éxito
-        res.status(201).json({ message: "Mensaje agregado exitosamente", messageId: results.insertId });
+        res.status(201).json({
+            message: "Mensaje agregado exitosamente",
+            messageId: results.insertId,
+        });
     });
 });
 

@@ -61,7 +61,6 @@ router.get("/empresas/nombre/:nombre_empresa", (req, res) => {
     });
 });
 
-
 // INICIAR SEION
 function verificarCredenciales(email, contrasena) {
     const sql =
@@ -116,8 +115,6 @@ function obtenerInformacionEmpresa(email) {
                 fecha_creacion_empresa: emailEncontrado.fecha_creacion_empresa,
                 horario_empresa: emailEncontrado.horario_empresa,
                 id_categoria: emailEncontrado.id_categoria_empresa,
-
-                
             };
 
             resolve(informacionEmpresa);
@@ -129,7 +126,10 @@ router.post("/iniciar_sesion_empresa", async (req, res) => {
     const { email, contrasena } = req.body;
 
     try {
-        const credencialesValidas = await verificarCredenciales(email, contrasena);
+        const credencialesValidas = await verificarCredenciales(
+            email,
+            contrasena
+        );
 
         if (credencialesValidas) {
             const informacionEmpresa = await obtenerInformacionEmpresa(email);
@@ -142,8 +142,6 @@ router.post("/iniciar_sesion_empresa", async (req, res) => {
         res.status(500).send("Error al verificar las credenciales");
     }
 });
-
-
 
 //  Información de la empresa con ID: **** ?
 router.get("/empresas/:id_empresa", (req, res) => {
@@ -166,7 +164,6 @@ router.get("/empresas/:id_empresa", (req, res) => {
         res.json(results[0]);
     });
 });
-
 
 //MODIFICA LOS DATOS DIGITADOS, SI LOS DEJAS SIN RELLENAR SE MANTIENEN LOS DATOS ANTIGUOS
 router.put("/empresas/:id_empresa", (req, res) => {
@@ -217,7 +214,7 @@ router.put("/empresas/:id_empresa", (req, res) => {
         descripcion_empresa,
         fecha_creacion_empresa,
         horario_empresa,
-        empresaId
+        empresaId,
     ];
 
     connection.query(sql, values, (error, results) => {
@@ -235,7 +232,5 @@ router.put("/empresas/:id_empresa", (req, res) => {
         res.status(200).send("Empresa actualizada correctamente");
     });
 });
-
-
 
 module.exports = router;
