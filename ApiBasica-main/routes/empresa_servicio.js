@@ -47,7 +47,7 @@ router.get("/empresa-servicio/:id_servicio", (req, res) => {
             return;
         }
 
-        res.json(results[0]);
+        res.json(results);
     });
 });
 
@@ -74,7 +74,7 @@ router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
             return;
         }
 
-        res.json(results[0]);
+        res.json(results);
     });
 });
 
