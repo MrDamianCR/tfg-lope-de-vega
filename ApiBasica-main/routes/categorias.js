@@ -40,4 +40,11 @@ router.get("/categorias/:id_categoria", (req, res) => {
     });
 });
 
+
+
+
+
+
+
+
 module.exports = router;
