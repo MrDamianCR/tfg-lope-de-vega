@@ -29,12 +29,12 @@ const connection = require("../db");
 router.get("/empresa-servicio/:id_servicio", (req, res) => {
     const empresaservicioId = req.params.id_servicio;
     const sql =
-        "SELECT es.precio, e.nombre_empresa FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa WHERE es.id_servicio = ?";
+        "SELECT es.precio, e.nombre_empresa, s.nombre_servicio FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa INNER JOIN servicios AS s ON es.id_servicio = s.id_servicio WHERE es.id_servicio = ?";
 
     connection.query(sql, [empresaservicioId], (error, results) => {
         if (error) {
-            console.error("Error al obtener información de la empresa y el precio: ", error);
-            res.status(500).send("Error al obtener información de la empresa y el precio");
+            console.error("Error al obtener información de la empresa, el servicio y el precio: ", error);
+            res.status(500).send("Error al obtener información de la empresa, el servicio y el precio");
             return;
         }
 
@@ -46,6 +46,31 @@ router.get("/empresa-servicio/:id_servicio", (req, res) => {
         res.json(results[0]);
     });
 });
+
+
+
+//  Información de la empresa-servicio con id_empresa **** ?
+router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
+    const empresaservicioId = req.params.id_empresa;
+    const sql =
+        "SELECT es.precio, e.nombre_empresa, s.nombre_servicio FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa INNER JOIN servicios AS s ON es.id_servicio = s.id_servicio WHERE es.id_empresa = ?";
+
+    connection.query(sql, [empresaservicioId], (error, results) => {
+        if (error) {
+            console.error("Error al obtener información de la empresa, el servicio y el precio: ", error);
+            res.status(500).send("Error al obtener información de la empresa, el servicio y el precio");
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send("Empresa o servicio no encontrados");
+            return;
+        }
+
+        res.json(results[0]);
+    });
+});
+
 
 
 
