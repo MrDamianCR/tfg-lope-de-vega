@@ -81,41 +81,7 @@ router.get("/usuarios/:id_usuario", (req, res) => {
     });
 });*/
 
-// Añadir usuario
-router.post("/usuarios", (req, res) => {
-    const {
-        nombre_usuario,
-        apellidos_usuario,
-        email_usuario,
-        pass_usuario,
-        fecha_nacimiento_usuario,
-        telefono_usuario,
-        email_recuperacion_usuario,
-    } = req.body;
-    const sql =
-        "INSERT INTO usuarios (nombre_usuario, apellidos_usuario, email_usuario, pass_usuario, fecha_nacimiento_usuario, telefono_usuario, email_recuperacion_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    connection.query(
-        sql,
-        [
-            nombre_usuario,
-            apellidos_usuario,
-            email_usuario,
-            pass_usuario,
-            fecha_nacimiento_usuario,
-            telefono_usuario,
-            email_recuperacion_usuario,
-        ],
-        (error, result) => {
-            if (error) {
-                console.error("Error al añadir usuario: ", error);
-                res.status(500).send("Error al añadir usuario");
-                return;
-            }
 
-            res.status(202).json(result);
-        }
-    );
-});
 
 // Actualizar usuario tienes que rellenar TODOS los campos
 router.put("/usuarios/:id_usuario", (req, res) => {
@@ -235,11 +201,11 @@ router.put("/usuarios/cambiardatos/:id_usuario", (req, res) => {
     });
 });
 
-// INICIAR SEION
-function verificarCredenciales(nombre, contrasena) {
+// INICIAR SEsION Usuario
+function verificarCredenciales(email_usuario, contrasena) {
     const sql =
-        "SELECT * FROM usuarios WHERE nombre_usuario = ? AND pass_usuario = ?";
-    const values = [nombre, contrasena];
+        "SELECT * FROM usuarios WHERE email_usuario = ? AND pass_usuario = ?";
+    const values = [email_usuario, contrasena];
 
     return new Promise((resolve, reject) => {
         connection.query(sql, values, (error, result) => {
@@ -254,9 +220,9 @@ function verificarCredenciales(nombre, contrasena) {
     });
 }
 
-function obtenerInformacionUsuario(nombre) {
-    const sql = "SELECT * FROM usuarios WHERE nombre_usuario = ?";
-    const values = [nombre];
+function obtenerInformacionUsuario(email_usuario) {
+    const sql = "SELECT * FROM usuarios WHERE email_usuario = ?";
+    const values = [email_usuario];
 
     return new Promise((resolve, reject) => {
         connection.query(sql, values, (error, result) => {
@@ -287,17 +253,18 @@ function obtenerInformacionUsuario(nombre) {
     });
 }
 
+//INICIAR SESION
 router.post("/iniciar_sesion", async (req, res) => {
-    const { nombre, contrasena } = req.body;
+    const { email_usuario, contrasena } = req.body;
 
     try {
         const credencialesValidas = await verificarCredenciales(
-            nombre,
+            email_usuario,
             contrasena
         );
 
         if (credencialesValidas) {
-            const informacionUsuario = await obtenerInformacionUsuario(nombre);
+            const informacionUsuario = await obtenerInformacionUsuario(email_usuario);
             res.json(informacionUsuario);
         } else {
             res.status(401).send("Credenciales inválidas");
@@ -443,5 +410,81 @@ router.put("/usuarios/cambiardatos/:id_usuario", (req, res) => {
         res.status(200).send("Usuario actualizado correctamente");
     });
 });
+
+
+//Registrar Usuario 
+
+router.post("/usuarios", (req, res) => {
+    const {
+        nombre_usuario,
+        apellidos_usuario,
+        email_usuario,
+        pass_usuario,
+        fecha_nacimiento_usuario,
+        telefono_usuario,
+        email_recuperacion_usuario,
+    } = req.body;
+
+    const checkSql =
+        "SELECT * FROM usuarios WHERE email_usuario = ? OR telefono_usuario = ? OR email_recuperacion_usuario = ?";
+    connection.query(
+        checkSql,
+        [email_usuario, telefono_usuario, email_recuperacion_usuario],
+        (checkError, checkResult) => {
+            if (checkError) {
+                console.error("Error al verificar duplicados: ", checkError);
+                res.status(500).send("Error al añadir usuario");
+                return;
+            }
+
+            if (checkResult.length > 0) {
+                // Al menos un campo ya existe en la base de datos
+                const duplicateFields = [];
+                checkResult.forEach((row) => {
+                    if (row.email_usuario === email_usuario) {
+                        duplicateFields.push("email_usuario");
+                    }
+                    if (row.telefono_usuario === telefono_usuario) {
+                        duplicateFields.push("telefono_usuario");
+                    }
+                    if (row.email_recuperacion_usuario === email_recuperacion_usuario) {
+                        duplicateFields.push("email_recuperacion_usuario");
+                    }
+                });
+                res.status(409).json({ error: "Los siguientes campos ya existen en la base de datos: ", duplicateFields });
+                return;
+            }
+
+            // Insertar el nuevo usuario en la base de datos
+            const insertSql =
+                "INSERT INTO usuarios (nombre_usuario, apellidos_usuario, email_usuario, pass_usuario, fecha_nacimiento_usuario, telefono_usuario, email_recuperacion_usuario) VALUES (?, ?, ?, ?, ?, ?, ?)";
+            connection.query(
+                insertSql,
+                [
+                    nombre_usuario,
+                    apellidos_usuario,
+                    email_usuario,
+                    pass_usuario,
+                    fecha_nacimiento_usuario,
+                    telefono_usuario,
+                    email_recuperacion_usuario,
+                ],
+                (insertError, result) => {
+                    if (insertError) {
+                        console.error("Error al añadir usuario: ", insertError);
+                        res.status(500).send("Error al añadir usuario");
+                        return;
+                    }
+
+                    res.status(202).json(result);
+                }
+            );
+        }
+    );
+});
+
+
+
+
 
 module.exports = router;
