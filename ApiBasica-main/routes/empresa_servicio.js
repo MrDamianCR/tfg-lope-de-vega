@@ -78,4 +78,27 @@ router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
     });
 });
 
+//  Información de la empresa-servicio con id_categoria **** ?
+
+router.get("/empresa-servicio/id_categoria/:id_categoria", (req, res) => {
+    const categoriaId = req.params.id_categoria;
+    const sql =
+        "SELECT es.precio, e.nombre_empresa, s.nombre_servicio FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa INNER JOIN servicios AS s ON es.id_servicio = s.id_servicio WHERE s.id_categoria_servicio = ?";
+
+    connection.query(sql, [categoriaId], (error, results) => {
+        if (error) {
+            console.error("Error al obtener información de la empresa, el servicio y el precio: ", error);
+            res.status(500).send("Error al obtener información de la empresa, el servicio y el precio");
+            return;
+        }
+
+        if (results.length === 0) {
+            res.status(404).send("No se encontraron empresas o servicios para la categoría especificada");
+            return;
+        }
+
+        res.json(results);
+    });
+});
+
 module.exports = router;
