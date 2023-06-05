@@ -2,9 +2,20 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../db");
 
-//Mostrar todas las reservas
+//Mostrar Reservas 
 router.get("/reservas", (req, res) => {
-    const sql = "SELECT * FROM reservas";
+
+
+    const {esCliente, id, dia} = req.body;
+
+    let sql = "SELECT * FROM reservas where ";
+
+    if(!esCliente){sql+="id_empresa_reserva "}
+    else{sql+="id_usuario_reserva "}
+
+    sql += " = ? and fecha_hora_reserva = ?"
+
+    console.log(sql);
 
     connection.query(sql, (error, results) => {
         if (error) {
