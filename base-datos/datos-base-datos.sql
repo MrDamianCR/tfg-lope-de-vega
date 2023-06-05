@@ -1,5 +1,5 @@
 INSERT INTO usuarios (nombre_usuario, apellidos_usuario, email_usuario, pass_usuario, fecha_nacimiento_usuario, telefono_usuario, email_recuperacion_usuario)
-VALUES ('John', 'Doe', 'johndoe@example.com', 'password123', '1990-01-01', '+1-555-555-5555', 'johndoe_recovery@example.com');
+VALUES ('Negrito', 'Doe', 'johndoe@example.com', 'password123', '1990-01-01', '+1-555-555-5555', 'johndoe_recovery@example.com');
 
 INSERT INTO usuarios (nombre_usuario, apellidos_usuario, email_usuario, pass_usuario, fecha_nacimiento_usuario, telefono_usuario, email_recuperacion_usuario)
 VALUES ('Jane', 'Doe', 'janedoe@example.com', 'password123', '1995-05-05', '+1-555-555-5555', 'janedoe_recovery@example.com');
