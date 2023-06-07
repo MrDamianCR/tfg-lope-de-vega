@@ -101,4 +101,46 @@ router.get("/empresa-servicio/id_categoria/:id_categoria", (req, res) => {
     });
 });
 
+//BORRAR REALACION EMPRESA-SERVICIO
+router.delete("/empresa-servicio/:id_servicio/:id_empresa", (req, res) => {
+    const { id_servicio, id_empresa } = req.params;
+
+    const sql = "DELETE FROM `empresa-servicio` WHERE id_servicio = ? AND id_empresa = ?";
+
+    connection.query(sql, [id_servicio, id_empresa], (error, results) => {
+        if (error) {
+            console.error("Error al eliminar la relación empresa-servicio: ", error);
+            res.status(500).send("Error al eliminar la relación empresa-servicio");
+            return;
+        }
+
+        if (results.affectedRows > 0) {
+            res.status(200).send("Relación empresa-servicio eliminada con éxito");
+        } else {
+            res.status(404).send("No se encontró la relación empresa-servicio");
+        }
+    });
+});
+
+//REGISTRA RELACION EMPRESA-SERVICIO
+
+router.post("/empresa-servicio", (req, res) => {
+    const { id_servicio, id_empresa, precio } = req.body;
+
+    const sql = "INSERT INTO `empresa-servicio` (id_servicio, id_empresa, precio) VALUES (?, ?, ?)";
+
+    connection.query(sql, [id_servicio, id_empresa, precio], (error, results) => {
+        if (error) {
+            console.error("Error al registrar la relación empresa-servicio: ", error);
+            res.status(500).send("Error al registrar la relación empresa-servicio");
+            return;
+        }
+
+        res.status(200).send("Relación empresa-servicio registrada con éxito");
+    });
+});
+
+
+
+
 module.exports = router;

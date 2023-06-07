@@ -2,22 +2,30 @@ const express = require("express");
 const router = express.Router();
 const connection = require("../db");
 
-//Mostrar 
-router.get("/reservas", (req, res) => {
+//Mostrar reserva de empresa/usuario o cliente/usuario
 
+router.post("/reservas", (req, res) => {
+    const { esCliente, id } = req.body;
 
-    const {esCliente, id, dia} = req.body;
+    let sql = "SELECT r.fecha_reserva, r.hora_reserva, ";
 
-    let sql = "SELECT * FROM reservas where ";
+    if (esCliente) {
+        // Si es cliente, obtenemos el nombre de la empresa donde hace la reserva
+        sql += "e.nombre_empresa AS nombre_reserva ";
+        sql += "FROM reservas r ";
+        sql += "INNER JOIN empresas e ON r.id_empresa_reserva = e.id_empresa ";
+        sql += "WHERE r.id_usuario_reserva = ? ";
+    } else {
+        // Si es empresa, obtenemos el nombre de usuario que realiza la reserva
+        sql += "u.nombre_usuario AS nombre_reserva ";
+        sql += "FROM reservas r ";
+        sql += "INNER JOIN usuarios u ON r.id_usuario_reserva = u.id_usuario ";
+        sql += "WHERE r.id_empresa_reserva = ? ";
+    }
 
-    if(!esCliente){sql+="id_empresa_reserva "}
-    else{sql+="id_usuario_reserva "}
+    sql += "ORDER BY r.fecha_reserva, r.hora_reserva";
 
-    sql += " = ? and fecha_hora_reserva = ?"
-
-    console.log(sql);
-
-    connection.query(sql, (error, results) => {
+    connection.query(sql, [id], (error, results) => {
         if (error) {
             console.error("Error al obtener reservas: ", error);
             res.status(500).send("Error al obtener reservas");
@@ -37,12 +45,13 @@ router.post("/reservas", (req, res) => {
 
     // Insertar la nueva reserva en la tabla de reservas
     const sql =
-        "INSERT INTO reservas (fecha_hora_reserva, comentario_reserva, id_usuario_reserva, id_empresa_reserva, id_servicio_reserva) VALUES (?, ?, ?, ?, ?)";
+        "INSERT INTO reservas (fecha_reserva, hora_reserva, comentario_reserva, id_usuario_reserva, id_empresa_reserva, id_servicio_reserva) VALUES (?, ?, ?, ?, ?)";
 
     connection.query(
         sql,
         [
-            nuevaReserva.fecha_hora_reserva,
+            nuevaReserva.fecha_reserva,
+            nuevaReserva.fecha_reserva,
             nuevaReserva.comentario_reserva,
             idUsuarioReserva,
             nuevaReserva.id_empresa_reserva,

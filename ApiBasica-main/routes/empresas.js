@@ -21,7 +21,7 @@ router.get("/empresas", (req, res) => {
 router.get("/empresas/:id_empresa", (req, res) => {
     const empresaId = req.params.id_empresa;
     const sql =
-        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa, horario_empresa, id_categoria_empresa FROM empresas WHERE id_empresa = ?";
+        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa FROM empresas WHERE id_empresa = ?";
 
     connection.query(sql, [empresaId], (error, results) => {
         if (error) {
@@ -43,7 +43,7 @@ router.get("/empresas/:id_empresa", (req, res) => {
 router.get("/empresas/nombre/:nombre_empresa", (req, res) => {
     const nombreEmpresa = req.params.nombre_empresa;
     const sql =
-        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa, horario_empresa, id_categoria_empresa FROM empresas WHERE nombre_empresa LIKE ?";
+        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa FROM empresas WHERE nombre_empresa LIKE ?";
 
     connection.query(sql, [`%${nombreEmpresa}%`], (error, results) => {
         if (error) {
@@ -113,8 +113,7 @@ function obtenerInformacionEmpresa(email_usuario) {
                 web: emailEncontrado.web_empresa,
                 descripcion: emailEncontrado.descripcion_empresa,
                 fechaNcimiento: emailEncontrado.fecha_creacion_empresa,
-                horario_empresa: emailEncontrado.horario_empresa,
-                id_categoria: emailEncontrado.id_categoria_empresa,
+                
             };
 
             resolve(informacionEmpresa);
@@ -149,7 +148,7 @@ router.post("/iniciar_sesion_empresa", async (req, res) => {
 router.get("/empresas/:id_empresa", (req, res) => {
     const empresaId = req.params.id_empresa;
     const sql =
-        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa, horario_empresa, id_categoria_empresa FROM empresas WHERE id_empresa = ?";
+        "SELECT nombre_empresa, cif_empresa, email_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa,telefono2_empresa, telefono3_empresa, pass_empresa, web_empresa,descripcion_empresa, fecha_creacion_empresa FROM empresas WHERE id_empresa = ?";
 
     connection.query(sql, [empresaId], (error, results) => {
         if (error) {
@@ -183,7 +182,7 @@ router.put("/empresas/:id_empresa", (req, res) => {
         web_empresa,
         descripcion_empresa,
         fecha_creacion_empresa,
-        horario_empresa,
+        
     } = req.body;
 
     const sql = `UPDATE empresas SET 
@@ -198,8 +197,8 @@ router.put("/empresas/:id_empresa", (req, res) => {
         telefono3_empresa = IFNULL(?, telefono3_empresa),
         web_empresa = IFNULL(?, web_empresa),
         descripcion_empresa = IFNULL(?, descripcion_empresa),
-        fecha_creacion_empresa = IFNULL(?, fecha_creacion_empresa),
-        horario_empresa = IFNULL(?, horario_empresa)
+        fecha_creacion_empresa = IFNULL(?, fecha_creacion_empresa)
+        
         WHERE id_empresa = ?`;
 
     const values = [
@@ -215,7 +214,7 @@ router.put("/empresas/:id_empresa", (req, res) => {
         web_empresa,
         descripcion_empresa,
         fecha_creacion_empresa,
-        horario_empresa,
+        
         empresaId,
     ];
 
@@ -252,15 +251,13 @@ router.post("/registrar_empresa", async (req, res) => {
         web_empresa,
         descripcion_empresa,
         fecha_creacion_usuario,
-        horario_empresa,
-        id_categoria_empresa,
     } = req.body;
 
     const checkSql =
         "SELECT * FROM empresas WHERE email_empresa = ? OR nombre_empresa = ?";
     connection.query(
         checkSql,
-        [email_usuario, nombre_usuario ],
+        [email_usuario, nombre_usuario],
         (checkError, checkResult) => {
             if (checkError) {
                 console.error("Error al verificar duplicados: ", checkError);
@@ -297,11 +294,9 @@ router.post("/registrar_empresa", async (req, res) => {
                 });
                 return;
             }
-            
 
-            // Insertar la nueva empresa en la base de datos
             const insertSql =
-                "INSERT INTO empresas (nombre_empresa, cif_empresa, email_empresa, pass_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa, telefono2_empresa, telefono3_empresa, web_empresa, descripcion_empresa, fecha_creacion_empresa, horario_empresa, id_categoria_empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "INSERT INTO empresas (nombre_empresa, cif_empresa, email_empresa, pass_empresa, email_recuperacion_empresa, ciudad_empresa, direccion_empresa, telefono1_empresa, telefono2_empresa, telefono3_empresa, web_empresa, descripcion_empresa, fecha_creacion_empresa) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             connection.query(
                 insertSql,
                 [
@@ -318,8 +313,6 @@ router.post("/registrar_empresa", async (req, res) => {
                     web_empresa,
                     descripcion_empresa,
                     fecha_creacion_usuario,
-                    horario_empresa,
-                    id_categoria_empresa,
                 ],
                 (insertError, result) => {
                     if (insertError) {
@@ -328,11 +321,14 @@ router.post("/registrar_empresa", async (req, res) => {
                         return;
                     }
 
-                    res.status(202).json(result);
+                    const empresaId = result.insertId; // Obtener el ID de la empresa insertada
+
+                    res.status(202).json({ empresaId });
                 }
             );
         }
     );
 });
+
 
 module.exports = router;
