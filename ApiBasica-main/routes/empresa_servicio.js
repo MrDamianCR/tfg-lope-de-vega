@@ -52,10 +52,10 @@ router.get("/empresa-servicio/:id_servicio", (req, res) => {
 });
 
 //  Información de la empresa-servicio con id_empresa **** ?
-router.get("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
+router.post("/empresa-servicio/id_empresa/:id_empresa", (req, res) => {
     const empresaservicioId = req.params.id_empresa;
     const sql =
-        "SELECT es.precio, e.nombre_empresa, s.nombre_servicio FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa INNER JOIN servicios AS s ON es.id_servicio = s.id_servicio WHERE es.id_empresa = ?";
+        "SELECT es.precio, e.nombre_empresa, s.nombre_servicio, es.id_servicio as id FROM `empresa-servicio` AS es INNER JOIN empresas AS e ON es.id_empresa = e.id_empresa INNER JOIN servicios AS s ON es.id_servicio = s.id_servicio WHERE es.id_empresa = ?";
 
     connection.query(sql, [empresaservicioId], (error, results) => {
         if (error) {
@@ -102,7 +102,7 @@ router.get("/empresa-servicio/id_categoria/:id_categoria", (req, res) => {
 });
 
 //BORRAR REALACION EMPRESA-SERVICIO
-router.delete("/empresa-servicio/:id_servicio/:id_empresa", (req, res) => {
+router.post("/empresa-servicio/:id_servicio/:id_empresa", (req, res) => {
     const { id_servicio, id_empresa } = req.params;
 
     const sql = "DELETE FROM `empresa-servicio` WHERE id_servicio = ? AND id_empresa = ?";
