@@ -10,6 +10,7 @@ const serviciosRouter = require("./routes/servicios");
 const facturasRouter = require("./routes/facturas");
 const reservasRouter = require("./routes/reservas");
 const empresaservicioRouter = require("./routes/empresa_servicio");
+const horariosempresasRouter = require("./routes/horarios_empresas");
 
 
 const connection = require("./db");
@@ -30,6 +31,7 @@ app.use("/api", serviciosRouter);
 app.use("/api", facturasRouter);
 app.use("/api", reservasRouter);
 app.use("/api", empresaservicioRouter);
+app.use("/api", horariosempresasRouter);
 
 
 // Iniciar el servidor
